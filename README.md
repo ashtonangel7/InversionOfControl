@@ -1,2 +1,3 @@
-# BlankTypeScriptNodeProject
- A Blank Typescript Node.js Template 
+# Inversion Of Control
+ 
+ Typescript project demonstrating inversion of control. 
