@@ -3,25 +3,24 @@ import ICommandFactory = require("./ICommandFactory");
 
 import DataFlow = require("../dataflows/DataFlow");
 import ConcreteReader = require("../dataflows/readers/ConcreteReader");
-import SqlConnector = require("../connectors/SqlConnector")
+import FileConnector = require("../connectors/FileConnector");
 
-class SqlCommand implements ICommand, ICommandFactory {
+class FileCommand implements ICommand, ICommandFactory {
     CommandName: string;
     Description: string;
-
-    constructor() {
-        this.CommandName = "Sql";
-        this.Description = "SqlCommand";
+    constructor() { 
+        this.CommandName = "File";
+        this.Description = "FileCommand";
     }
     MakeCommand(args: string[]): ICommand {
-        return new SqlCommand();
+        return new FileCommand();
     }
-    execute(): void {        
-        let sqlConnector = new SqlConnector();
-        let concreteReader = new ConcreteReader(sqlConnector);
+    execute(): void {
+        let fileConnector = new FileConnector();
+        let concreteReader = new ConcreteReader(fileConnector);
         let dataFlow = new DataFlow(concreteReader);
         dataFlow.Read();
     }
 }
 
-export = SqlCommand;
+export = FileCommand;
