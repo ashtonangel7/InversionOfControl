@@ -20,10 +20,10 @@ let availableCommands: Array<ICommandFactory> = [
 let parser: CommandParser = new CommandParser(availableCommands);
 let command = parser.ParseCommand(process.argv);
 
-if (command)
+if (command) {
     command.execute();
+}
 
 let dataFlow = new DataFlow(concreteReader);
-
 dataFlow.Read();
 
