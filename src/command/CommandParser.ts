@@ -1,5 +1,6 @@
 import ICommandFactory = require("./ICommandFactory");
 import ICommand = require("./ICommand");
+import NullCommand = require("./NullCommand");
 
 class CommandParser {
     private readonly _availableCommands: Array<ICommandFactory>;
@@ -9,7 +10,9 @@ class CommandParser {
 
     private FindRequestedCommand(commandName: string): ICommandFactory {
         return this._availableCommands.find((com) => {
-            return com.CommandName == commandName;
+            let lowerCommand = com.CommandName.toLowerCase();
+            let lowerCompareCommand = commandName == null ? "" : commandName.toLowerCase();
+            return lowerCommand == commandName;
         });
     }
 
@@ -21,8 +24,7 @@ class CommandParser {
             return command.MakeCommand(args);
         }
         else {
-            console.log("Command not found.");
-            return null;
+            return new NullCommand();
         }
     }
 }

@@ -1,6 +1,10 @@
 import ICommand = require("./ICommand");
 import ICommandFactory = require("./ICommandFactory");
 
+import DataFlow = require("../dataflows/DataFlow");
+import ConcreteReader = require("../dataflows/readers/ConcreteReader");
+import SqlConnector = require("../connectors/SqlConnector")
+
 class SqlCommand implements ICommand, ICommandFactory {
     CommandName: string;
     Description: string;
@@ -13,7 +17,11 @@ class SqlCommand implements ICommand, ICommandFactory {
         return new SqlCommand();
     }
     execute(): void {
-        console.log("Executing Sql Command.");
+        
+        let sqlConnector = new SqlConnector();
+        let concreteReader = new ConcreteReader(sqlConnector);
+        let dataFlow = new DataFlow(concreteReader);
+        dataFlow.Read();
     }
 }
 
