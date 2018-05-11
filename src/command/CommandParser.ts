@@ -12,7 +12,7 @@ class CommandParser {
         return this._availableCommands.find((com) => {
             let lowerCommand = com.CommandName.toLowerCase();
             let lowerCompareCommand = commandName == null ? "" : commandName.toLowerCase();
-            return lowerCommand == commandName;
+            return lowerCommand == lowerCompareCommand;
         });
     }
 
